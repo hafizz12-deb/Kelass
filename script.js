@@ -1,16 +1,362 @@
-// EDIT DATA DI SINI
-const students=[['Hanif',17,'Badminton','Tetap sederhana, terus berkembang.'],['Retno',17,'Membaca','Nikmati prosesnya.'],['Maritza',16,'Music','Do what makes you happy.'],['Naila',17,'Badminton','Small steps every day.'],['Nana',17,'Drawing','Create your own story.'],['Nurul',17,'Cooking','Be kind, always.'],['Orin',17,'Gaming','Never stop learning.'],['Putri',16,'Listening to music','Everything will be okay.'],['Royhan',17,'Gaming','Work hard, stay humble.'],['Sriyanti',17,'Badminton','Make today count.'],['Alya',17,'Reading','Believe in yourself.'],['Aisyah',16,'Photography','Collect moments, not things.'],['Kirana',17,'Writing','Your effort matters.'],['Joshua',17,'Gaming','Keep moving forward.'],['Dinda',17,'Cooking','Good things take time.'],['Hafidzul Furqan',17,'Gaming & Badminton','Be better than yesterday.'],['Faris',17,'Football','Stay focused.'],['Rizky',16,'Gaming','Enjoy the journey.'],['Salsa',17,'Drawing','Dream big.'],['Siti',17,'Reading','One day at a time.'],['Della',16,'Cooking','Make it meaningful.'],['Fina',17,'Music','Let your heart speak.'],['Rani',17,'Badminton','Keep your spirit high.'],['Vina',16,'Movies','Life is a collection of moments.'],['Aulia',17,'Reading','Learn, grow, repeat.'],['Nadia',17,'Singing','Be yourself.'],['Rafa',17,'Basketball','Never give up.'],['Ilham',16,'Gaming','Stay positive.'],['Fikri',17,'Football','Discipline beats motivation.'],['Naufal',17,'Cycling','Enjoy every ride.'],['Citra',16,'Drawing','Make something beautiful.'],['Maya',17,'Cooking','Happiness is homemade.'],['Dimas',17,'Gaming','Keep improving.'],['Rara',16,'Music','Follow your passion.'],['Bagas',17,'Badminton','Practice makes progress.'],['Zahra',17,'Reading','Be proud of your progress.']];
-const moments=['https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1400&q=85','https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=1400&q=85','https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=1400&q=85','https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=1400&q=85','https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?auto=format&fit=crop&w=1400&q=85','https://images.unsplash.com/photo-1504150558240-0b4fd8946624?auto=format&fit=crop&w=1400&q=85'];
-const lessons={Senin:[['07:00–08:30','Matematika','Guru Matematika'],['08:30–10:00','Bahasa Indonesia','Guru Bahasa Indonesia'],['10:30–12:00','IPA','Guru IPA'],['13:00–14:30','PJOK','Guru PJOK']],Selasa:[['07:00–08:30','Bahasa Inggris','Guru Bahasa Inggris'],['08:30–10:00','Informatika','Guru Informatika'],['10:30–12:00','IPS','Guru IPS'],['13:00–14:30','Seni Budaya','Guru Seni Budaya']],Rabu:[['07:00–08:30','Pendidikan Agama','Guru Agama'],['08:30–10:00','Matematika','Guru Matematika'],['10:30–12:00','Bahasa Inggris','Guru Bahasa Inggris'],['13:00–14:30','PKN','Guru PKN']],Kamis:[['07:00–08:30','Bahasa Indonesia','Guru Bahasa Indonesia'],['08:30–10:00','Kimia','Guru Kimia'],['10:30–12:00','Sejarah','Guru Sejarah'],['13:00–14:30','Informatika','Guru Informatika']],Jumat:[['07:00–08:30','Fisika','Guru Fisika'],['08:30–10:00','Matematika','Guru Matematika'],['10:30–12:00','Bahasa Inggris','Guru Bahasa Inggris'],['13:00–14:30','Projek Kelas','Wali Kelas']]};
-const duties={Senin:['Hanif','Retno','Maritza','Naila','Nana'],Selasa:['Nurul','Orin','Putri','Royhan','Sriyanti'],Rabu:['Alya','Aisyah','Kirana','Joshua','Dinda'],Kamis:['Faris','Rizky','Salsa','Siti','Della'],Jumat:['Fina','Rani','Vina','Aulia','Nadia']};
-const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-// MOMENTS CAROUSEL + SWIPE
-const track=$('#photoTrack'),dots=$('#photoDots');moments.forEach((src,i)=>{track.insertAdjacentHTML('beforeend',`<div class="photo-slide"><img src="${src}" alt="Moment ${i+1}"></div>`);dots.insertAdjacentHTML('beforeend',`<button class="dot ${i?'':'active'}" data-i="${i}"></button>`)});let pi=0;function showPhoto(i){pi=(i+moments.length)%moments.length;track.style.transform=`translateX(-${pi*100}%)`;$$( '.dot').forEach((d,n)=>d.classList.toggle('active',n===pi))}$('#photoPrev').onclick=()=>showPhoto(pi-1);$('#photoNext').onclick=()=>showPhoto(pi+1);$$('.dot').forEach(d=>d.onclick=()=>showPhoto(+d.dataset.i));let timer=setInterval(()=>showPhoto(pi+1),4500);let sx=0;$('#photoCarousel').ontouchstart=e=>{sx=e.changedTouches[0].clientX;clearInterval(timer)};$('#photoCarousel').ontouchend=e=>{let dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>45)showPhoto(pi+(dx<0?1:-1));timer=setInterval(()=>showPhoto(pi+1),4500)};
-// STUDENTS: HOME 4 BERGANTI OTOMATIS
-function img(i){return`https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80&sig=${i+1}`}function card(s,i){return`<article class="student-card"><img src="${img(i)}" alt="${s[0]}"><div class="student-info"><h3>${s[0]}</h3><p>Umur: ${s[1]} tahun</p><p>Hobby: ${s[2]}</p><p class="quote">“${s[3]}”</p></div></article>`}let so=0;function highlight(){let h=$('#studentHighlight');h.innerHTML='';for(let i=0;i<4;i++)h.insertAdjacentHTML('beforeend',card(students[(so+i)%students.length],(so+i)%students.length))}highlight();setInterval(()=>{so=(so+4)%students.length;highlight()},5000);
-// TABS: BUG FIX — SEMUA TAB DI-RESET, HANYA YANG DIKLIK ACTIVE
-function tabs(id,data,render){const el=$('#'+id);Object.keys(data).forEach((day,i)=>{let b=document.createElement('button');b.className='tab'+(i===0?' active':'');b.textContent=day;b.dataset.day=day;b.setAttribute('role','tab');b.setAttribute('aria-selected',i===0?'true':'false');b.onclick=()=>{el.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});b.classList.add('active');b.setAttribute('aria-selected','true');render(day)};el.appendChild(b)})}
-function lesson(day){$('#lessonPanel').innerHTML=lessons[day].map(x=>`<div class="schedule-row"><div class="time">${x[0]}</div><div><div class="subject">${x[1]}</div><span class="teacher">${x[2]}</span></div></div>`).join('')}function duty(day){$('#dutyPanel').innerHTML=`<div class="duty-list">${duties[day].map(n=>`<span class="duty-person">${n}</span>`).join('')}</div>`}tabs('lessonTabs',lessons,lesson);tabs('dutyTabs',duties,duty);lesson('Senin');duty('Senin');
-// MODAL SEMUA MURID & SEMUA MOMENTS
-function open(id){$(id).classList.add('show');document.body.style.overflow='hidden'}function close(id){$(id).classList.remove('show');document.body.style.overflow=''}$('#allStudentsBtn').onclick=()=>{$('#allStudentsGrid').innerHTML=students.map((s,i)=>card(s,i)).join('');open('#studentsModal')};$('#allMomentsBtn').onclick=()=>{$('#fullGallery').innerHTML=moments.map((s,i)=>`<img src="${s}" data-full="${s}" alt="Moment ${i+1}">`).join('');open('#momentsModal')};$$('[data-close]').forEach(b=>b.onclick=()=>close('#'+b.dataset.close));$$('.modal').forEach(m=>m.onclick=e=>{if(e.target===m)close('#'+m.id)});$('#fullGallery').onclick=e=>{if(e.target.tagName==='IMG'){$('#lightboxImg').src=e.target.dataset.full;$('#lightbox').classList.add('show')}};$('#lightboxClose').onclick=()=>$('#lightbox').classList.remove('show');
-$('#menuBtn').onclick=()=>$('#mobileMenu').classList.toggle('open');$('#mobileMenu').querySelectorAll('a').forEach(a=>a.onclick=()=>$('#mobileMenu').classList.remove('open'));$('#totalStudents').textContent=students.length;$('#maleStudents').textContent=18;$('#femaleStudents').textContent=students.length-18;
+/* =========================================================
+   X.3 SMAN 2 KARIMUN — DATA & INTERACTION
+   Edit data di bagian ini agar mudah diperbarui.
+   ========================================================= */
+
+const students = [
+  { name: "Hafidzul Furqan", age: 17, hobby: "Gaming & Badminton", quote: "Be better than yesterday.", image: "assets/images/student-01.svg" },
+  { name: "Aisyah Nur Rahma", age: 17, hobby: "Reading & Music", quote: "Keep growing, keep glowing.", image: "assets/images/student-02.svg" },
+  { name: "Kirana Dewi", age: 17, hobby: "Writing & Photography", quote: "Small steps still move forward.", image: "assets/images/student-03.svg" },
+  { name: "Joshua Tanuwijaya", age: 17, hobby: "Gaming & Sports", quote: "Enjoy the process.", image: "assets/images/student-04.svg" },
+  { name: "Dinda Ayu Lestari", age: 17, hobby: "Cooking & Drawing", quote: "Make today count.", image: "assets/images/student-05.svg" },
+  { name: "Nama Siswa 06", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-06.svg" },
+  { name: "Nama Siswa 07", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-07.svg" },
+  { name: "Nama Siswa 08", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-08.svg" },
+  { name: "Nama Siswa 09", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-09.svg" },
+  { name: "Nama Siswa 10", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-10.svg" },
+  { name: "Nama Siswa 11", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-11.svg" },
+  { name: "Nama Siswa 12", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-12.svg" },
+  { name: "Nama Siswa 13", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-13.svg" },
+  { name: "Nama Siswa 14", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-14.svg" },
+  { name: "Nama Siswa 15", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-15.svg" },
+  { name: "Nama Siswa 16", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-16.svg" },
+  { name: "Nama Siswa 17", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-17.svg" },
+  { name: "Nama Siswa 18", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-18.svg" },
+  { name: "Nama Siswa 19", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-19.svg" },
+  { name: "Nama Siswa 20", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-20.svg" },
+  { name: "Nama Siswa 21", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-21.svg" },
+  { name: "Nama Siswa 22", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-22.svg" },
+  { name: "Nama Siswa 23", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-23.svg" },
+  { name: "Nama Siswa 24", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-24.svg" },
+  { name: "Nama Siswa 25", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-25.svg" },
+  { name: "Nama Siswa 26", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-26.svg" },
+  { name: "Nama Siswa 27", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-27.svg" },
+  { name: "Nama Siswa 28", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-28.svg" },
+  { name: "Nama Siswa 29", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-29.svg" },
+  { name: "Nama Siswa 30", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-30.svg" },
+  { name: "Nama Siswa 31", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-31.svg" },
+  { name: "Nama Siswa 32", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-32.svg" },
+  { name: "Nama Siswa 33", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-33.svg" },
+  { name: "Nama Siswa 34", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-34.svg" },
+  { name: "Nama Siswa 35", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-35.svg" },
+  { name: "Nama Siswa 36", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-36.svg" }
+];
+
+const structure = [
+  ["Ketua Kelas", "Hafidzul Furqan"],
+  ["Wakil Ketua Kelas", "Aisyah Nur Rahma"],
+  ["Sekretaris 1", "Kirana Dewi"],
+  ["Sekretaris 2", "Joshua Tanuwijaya"],
+  ["Bendahara", "Dinda Ayu Lestari"]
+];
+
+const schedule = {
+  Senin: [
+    ["07:00–08:30", "Matematika", "Guru Mata Pelajaran"],
+    ["08:30–10:00", "Bahasa Indonesia", "Guru Mata Pelajaran"],
+    ["10:15–11:45", "Biologi", "Guru Mata Pelajaran"],
+    ["11:45–13:15", "Pendidikan Agama", "Guru Mata Pelajaran"]
+  ],
+  Selasa: [
+    ["07:00–08:30", "Bahasa Inggris", "Guru Mata Pelajaran"],
+    ["08:30–10:00", "Fisika", "Guru Mata Pelajaran"],
+    ["10:15–11:45", "Sejarah", "Guru Mata Pelajaran"],
+    ["11:45–13:15", "Informatika", "Guru Mata Pelajaran"]
+  ],
+  Rabu: [
+    ["07:00–08:30", "Kimia", "Guru Mata Pelajaran"],
+    ["08:30–10:00", "Matematika", "Guru Mata Pelajaran"],
+    ["10:15–11:45", "Bahasa Indonesia", "Guru Mata Pelajaran"],
+    ["11:45–13:15", "PJOK", "Guru Mata Pelajaran"]
+  ],
+  Kamis: [
+    ["07:00–08:30", "Pendidikan Pancasila", "Guru Mata Pelajaran"],
+    ["08:30–10:00", "Bahasa Inggris", "Guru Mata Pelajaran"],
+    ["10:15–11:45", "Ekonomi", "Guru Mata Pelajaran"],
+    ["11:45–13:15", "Seni Budaya", "Guru Mata Pelajaran"]
+  ],
+  Jumat: [
+    ["07:00–08:00", "Projek / Literasi", "Guru Mata Pelajaran"],
+    ["08:00–09:30", "Geografi", "Guru Mata Pelajaran"],
+    ["09:45–11:15", "Sosiologi", "Guru Mata Pelajaran"],
+    ["11:15–12:00", "Kegiatan Kelas", "Wali Kelas"]
+  ]
+};
+
+const duties = {
+  Senin: ["Hafidzul Furqan", "Aisyah Nur Rahma", "Nama Siswa 06", "Nama Siswa 07"],
+  Selasa: ["Kirana Dewi", "Joshua Tanuwijaya", "Nama Siswa 08", "Nama Siswa 09"],
+  Rabu: ["Dinda Ayu Lestari", "Nama Siswa 10", "Nama Siswa 11", "Nama Siswa 12"],
+  Kamis: ["Nama Siswa 13", "Nama Siswa 14", "Nama Siswa 15", "Nama Siswa 16"],
+  Jumat: ["Nama Siswa 17", "Nama Siswa 18", "Nama Siswa 19", "Nama Siswa 20"]
+};
+
+const gallery = [
+  { title: "Class Memory 01", image: "assets/images/moment-01.svg" },
+  { title: "Class Memory 02", image: "assets/images/moment-02.svg" },
+  { title: "Class Memory 03", image: "assets/images/moment-03.svg" },
+  { title: "Class Memory 04", image: "assets/images/moment-04.svg" },
+  { title: "Class Memory 05", image: "assets/images/moment-05.svg" },
+  { title: "Class Memory 06", image: "assets/images/moment-06.svg" },
+  { title: "Class Memory 07", image: "assets/images/moment-07.svg" },
+  { title: "Class Memory 08", image: "assets/images/moment-08.svg" }
+];
+
+const days = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
+
+const $ = (selector, parent = document) => parent.querySelector(selector);
+const $$ = (selector, parent = document) => [...parent.querySelectorAll(selector)];
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+  }[char]));
+}
+
+/* Structure */
+$("#structureGrid").innerHTML = structure.map(([role, person]) => `
+  <article class="structure-card reveal">
+    <p class="role">${escapeHTML(role)}</p>
+    <div class="person">${escapeHTML(person)}</div>
+    <div class="rule"></div>
+  </article>
+`).join("");
+
+/* Student cards */
+function studentCard(student) {
+  return `
+    <article class="student-card">
+      <img class="student-photo" src="${student.image}" alt="${escapeHTML(student.name)}" loading="lazy">
+      <div class="student-info">
+        <h3>${escapeHTML(student.name)}</h3>
+        <div class="student-meta">Umur: ${escapeHTML(student.age)} tahun<br>Hobby: ${escapeHTML(student.hobby)}</div>
+        <p class="student-quote">"${escapeHTML(student.quote)}"</p>
+      </div>
+    </article>
+  `;
+}
+
+let highlightPage = 0;
+const highlightPageSize = 4;
+
+function renderHighlight(animate = false) {
+  const box = $("#studentHighlight");
+  if (animate) box.classList.add("is-changing");
+  window.setTimeout(() => {
+    const start = (highlightPage * highlightPageSize) % students.length;
+    const selected = Array.from({length: highlightPageSize}, (_, i) => students[(start + i) % students.length]);
+    box.innerHTML = selected.map(studentCard).join("");
+    $("#studentHighlightDots").innerHTML = Array.from(
+      { length: Math.ceil(students.length / highlightPageSize) },
+      (_, i) => `<button class="dot ${i === highlightPage ? "active" : ""}" data-highlight="${i}" aria-label="Kelompok siswa ${i + 1}"></button>`
+    ).join("");
+    box.classList.remove("is-changing");
+  }, animate ? 260 : 0);
+}
+
+$("#studentHighlightDots").addEventListener("click", e => {
+  const button = e.target.closest("[data-highlight]");
+  if (!button) return;
+  highlightPage = Number(button.dataset.highlight);
+  renderHighlight(true);
+});
+
+$("#studentHighlight").addEventListener("click", () => {});
+renderHighlight();
+
+const highlightTimer = window.setInterval(() => {
+  highlightPage = (highlightPage + 1) % Math.ceil(students.length / highlightPageSize);
+  renderHighlight(true);
+}, 5000);
+
+/* All students modal */
+$("#allStudentsGrid").innerHTML = students.map(studentCard).join("");
+
+/* Tabs — exactly one active tab */
+function createTabs(container, onSelect, prefix) {
+  container.innerHTML = days.map((day, index) => `
+    <button class="tab ${index === 0 ? "active" : ""}" role="tab"
+      aria-selected="${index === 0 ? "true" : "false"}"
+      data-day="${day}" id="${prefix}-${day}">
+      ${day.toUpperCase()}
+    </button>
+  `).join("");
+
+  container.addEventListener("click", e => {
+    const clickedTab = e.target.closest(".tab");
+    if (!clickedTab) return;
+
+    $$(".tab", container).forEach(tab => {
+      tab.classList.remove("active");
+      tab.setAttribute("aria-selected", "false");
+    });
+
+    clickedTab.classList.add("active");
+    clickedTab.setAttribute("aria-selected", "true");
+    onSelect(clickedTab.dataset.day);
+  });
+}
+
+function renderSchedule(day) {
+  $("#scheduleContent").innerHTML = schedule[day].map(([time, subject, teacher]) => `
+    <article class="schedule-item">
+      <div class="schedule-time">${escapeHTML(time)}</div>
+      <div>
+        <div class="schedule-subject">${escapeHTML(subject)}</div>
+        <div class="schedule-teacher">${escapeHTML(teacher)}</div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderDuty(day) {
+  $("#dutyContent").innerHTML = duties[day].map(name =>
+    `<span class="duty-tag">${escapeHTML(name)}</span>`
+  ).join("");
+}
+
+createTabs($("#scheduleTabs"), renderSchedule, "schedule");
+createTabs($("#dutyTabs"), renderDuty, "duty");
+renderSchedule("Senin");
+renderDuty("Senin");
+
+/* Gallery */
+let galleryIndex = 0;
+let galleryTimer;
+const track = $("#carouselTrack");
+
+track.innerHTML = gallery.map((item, i) => `
+  <article class="carousel-slide">
+    <img src="${item.image}" alt="${escapeHTML(item.title)}" ${i === 0 ? "" : 'loading="lazy"'}>
+    <div class="carousel-caption">${escapeHTML(item.title)}</div>
+  </article>
+`).join("");
+
+function renderGalleryDots() {
+  $("#galleryDots").innerHTML = gallery.map((item, i) =>
+    `<button class="dot ${i === galleryIndex ? "active" : ""}" data-gallery="${i}" aria-label="Foto ${i + 1}"></button>`
+  ).join("");
+}
+
+function goToGallery(index) {
+  galleryIndex = (index + gallery.length) % gallery.length;
+  track.style.transform = `translate3d(-${galleryIndex * 100}%, 0, 0)`;
+  renderGalleryDots();
+}
+function nextGallery() { goToGallery(galleryIndex + 1); }
+function prevGallery() { goToGallery(galleryIndex - 1); }
+function startGalleryAuto() {
+  window.clearInterval(galleryTimer);
+  galleryTimer = window.setInterval(nextGallery, 4500);
+}
+goToGallery(0);
+startGalleryAuto();
+
+$("#galleryNext").addEventListener("click", () => { nextGallery(); startGalleryAuto(); });
+$("#galleryPrev").addEventListener("click", () => { prevGallery(); startGalleryAuto(); });
+$("#galleryDots").addEventListener("click", e => {
+  const dot = e.target.closest("[data-gallery]");
+  if (!dot) return;
+  goToGallery(Number(dot.dataset.gallery));
+  startGalleryAuto();
+});
+
+/* Swipe */
+let touchStartX = 0;
+let touchStartY = 0;
+track.addEventListener("touchstart", e => {
+  touchStartX = e.changedTouches[0].clientX;
+  touchStartY = e.changedTouches[0].clientY;
+}, { passive: true });
+track.addEventListener("touchend", e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+    dx < 0 ? nextGallery() : prevGallery();
+    startGalleryAuto();
+  }
+}, { passive: true });
+
+/* Full gallery */
+$("#allGalleryGrid").innerHTML = gallery.map((item, i) => `
+  <button class="gallery-item" data-lightbox="${i}" aria-label="Buka ${escapeHTML(item.title)}">
+    <img src="${item.image}" alt="${escapeHTML(item.title)}" loading="lazy">
+  </button>
+`).join("");
+
+/* Modal helpers */
+function openModal(id) {
+  const modal = document.getElementById(id);
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+}
+function closeModal(id) {
+  const modal = document.getElementById(id);
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+  if (!$$(".modal.open").length && !$("#lightbox").classList.contains("open")) document.body.classList.remove("modal-open");
+}
+
+$("#openStudents").addEventListener("click", () => openModal("studentsModal"));
+$("#openMoments").addEventListener("click", () => openModal("momentsModal"));
+
+$$(".close-modal").forEach(btn => {
+  btn.addEventListener("click", () => closeModal(btn.dataset.close));
+});
+
+$$(".modal").forEach(modal => {
+  modal.addEventListener("click", e => {
+    if (e.target === modal) closeModal(modal.id);
+  });
+});
+
+/* Lightbox */
+function openLightbox(index) {
+  const item = gallery[index];
+  $("#lightboxImage").src = item.image;
+  $("#lightboxImage").alt = item.title;
+  $("#lightboxCaption").textContent = item.title;
+  $("#lightbox").classList.add("open");
+  $("#lightbox").setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-open");
+}
+function closeLightbox() {
+  $("#lightbox").classList.remove("open");
+  $("#lightbox").setAttribute("aria-hidden", "true");
+  $("#lightboxImage").src = "";
+  if (!$$(".modal.open").length) document.body.classList.remove("modal-open");
+}
+$("#allGalleryGrid").addEventListener("click", e => {
+  const item = e.target.closest("[data-lightbox]");
+  if (item) openLightbox(Number(item.dataset.lightbox));
+});
+$("#lightboxClose").addEventListener("click", closeLightbox);
+$("#lightbox").addEventListener("click", e => {
+  if (e.target === $("#lightbox")) closeLightbox();
+});
+
+/* Escape closes dialogs */
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if ($("#lightbox").classList.contains("open")) closeLightbox();
+  $$(".modal.open").forEach(modal => closeModal(modal.id));
+});
+
+/* Mobile nav active state */
+const mobileLinks = $$(".mobile-nav a");
+const sections = ["home", "students", "moments", "schedule"].map(id => document.getElementById(id));
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    mobileLinks.forEach(link => link.classList.toggle("active", link.getAttribute("href") === `#${entry.target.id}`));
+  });
+}, { rootMargin: "-35% 0px -55% 0px", threshold: 0 });
+
+sections.forEach(section => observer.observe(section));
+
+/* Pause gallery when tab/window is hidden */
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) window.clearInterval(galleryTimer);
+  else startGalleryAuto();
+});

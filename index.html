@@ -1,11 +1,180 @@
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#8f5f38"><title>Welcome to X.3</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css"></head><body>
-<header class="topbar"><a class="brand" href="#home">X.3</a><nav class="desktop-nav"><a href="#home">HOME</a><a href="#struktur">STRUKTUR</a><a href="#students">STUDENTS</a><a href="#moments">GALLERY</a><a href="#schedule">SCHEDULE</a></nav><button class="menu-btn" id="menuBtn">☰</button></header><div class="mobile-menu" id="mobileMenu"><a href="#home">Home</a><a href="#about">About</a><a href="#struktur">Struktur</a><a href="#students">Students</a><a href="#moments">Moments</a><a href="#schedule">Schedule</a></div>
-<main id="home"><section class="hero section"><div><p class="eyebrow">SMAN 2 KARIMUN • CLASS X.3</p><h1>Welcome to <em>X.3</em></h1><p class="hero-text">Satu kelas, banyak cerita. Tempat untuk menyimpan momen, mengenal teman, dan tetap terhubung.</p><a class="instagram-btn" href="https://instagram.com/crimthreee_3" target="_blank">◎ Instagram Kelas ↗</a></div><div class="stats"><div class="stat"><strong id="totalStudents">36</strong><span>Total Siswa</span></div><div class="stat"><strong id="maleStudents">18</strong><span>Laki-laki</span></div><div class="stat"><strong id="femaleStudents">18</strong><span>Perempuan</span></div></div></section>
-<section class="section about" id="about"><div class="section-heading"><p class="eyebrow">ABOUT US</p><h2>Tentang Kami</h2></div><div class="about-grid"><article><span class="number">01</span><h3>About School</h3><p>SMAN 2 KARIMUN adalah sekolah menengah atas yang menjadi tempat kami belajar, berkembang, membangun karakter, dan menciptakan berbagai pengalaman bersama.</p></article><article><span class="number">02</span><h3>About Class</h3><p>X.3 adalah sebuah kelas yang dipenuhi berbagai karakter, minat, dan cerita. Kami belajar untuk saling mendukung, bekerja sama, dan menikmati setiap perjalanan sekolah bersama.</p></article></div></section>
-<section class="section" id="moments"><div class="section-heading"><p class="eyebrow">MEMORIES</p><h2>Moments</h2><p>Kumpulan momen yang kami abadikan bersama.</p></div><div class="photo-carousel" id="photoCarousel"><div class="photo-track" id="photoTrack"></div><button class="slider-btn prev" id="photoPrev">‹</button><button class="slider-btn next" id="photoNext">›</button><div class="dots" id="photoDots"></div></div><button class="outline-btn full-width-btn" id="allMomentsBtn">Selengkapnya</button></section>
-<section class="section structure-section" id="struktur"><div class="section-heading"><p class="eyebrow">CLASS ORGANIZATION</p><h2>Struktur Kelas</h2></div><div class="structure-card"><div class="structure-box main"><h3>Ketua Kelas</h3><span>Hafidzul Furqan</span></div><div class="connector"></div><div class="structure-box main"><h3>Wakil Ketua Kelas</h3><span>Aisyah Nur Rahma</span></div><div class="connector branch"></div><div class="structure-pair"><div class="structure-box"><h3>Sekretaris 1</h3><span>Kirana Dewi</span></div><div class="structure-box"><h3>Sekretaris 2</h3><span>Joshua Tanuwijaya</span></div><div class="structure-box"><h3>Bendahara</h3><span>Dinda Ayu Lestari</span></div></div></div></section>
-<section class="section" id="students"><div class="section-heading"><p class="eyebrow">OUR CLASSMATES</p><h2>Student Highlight</h2><p>Empat siswa ditampilkan bergantian secara otomatis.</p></div><div class="student-highlight" id="studentHighlight"></div><button class="outline-btn full-width-btn" id="allStudentsBtn">Lihat Semua Murid</button></section>
-<section class="section schedule-section" id="schedule"><div class="section-heading"><p class="eyebrow">WEEKLY PLAN</p><h2>Jadwal Pelajaran</h2></div><div class="tabs-wrap"><div class="tabs" id="lessonTabs" role="tablist"></div></div><div class="schedule-panel" id="lessonPanel"></div><div class="section-heading duty-heading"><p class="eyebrow">CLEANING DUTY</p><h2>Jadwal Piket</h2></div><div class="tabs-wrap"><div class="tabs" id="dutyTabs" role="tablist"></div></div><div class="duty-panel" id="dutyPanel"></div></section></main>
-<footer><div class="footer-grid"><div><div class="brand footer-brand">X.3</div><p>Class memories, people, and stories.</p></div><div><h4>About</h4><a href="#about">School</a><a href="#struktur">Structure</a></div><div><h4>Contact</h4><a href="https://instagram.com/crimthreee_3" target="_blank">Instagram</a><a href="#moments">Moments</a></div></div><div class="copyright">Made by Hafidzul Furqan</div></footer>
-<div class="modal" id="studentsModal"><div class="modal-card"><button class="modal-close" data-close="studentsModal">×</button><p class="eyebrow">X.3 STUDENTS</p><h2>Semua Murid</h2><div class="all-students-grid" id="allStudentsGrid"></div></div></div><div class="modal" id="momentsModal"><div class="modal-card"><button class="modal-close" data-close="momentsModal">×</button><p class="eyebrow">X.3 GALLERY</p><h2>Semua Moments</h2><div class="full-gallery" id="fullGallery"></div></div></div><div class="lightbox" id="lightbox"><button class="modal-close" id="lightboxClose">×</button><img id="lightboxImg" src="" alt="Moment kelas"></div>
-<nav class="bottom-nav"><a href="#home">⌂<span>Home</span></a><a href="#students">♙<span>Students</span></a><a href="#moments">▧<span>Gallery</span></a><a href="#schedule">☷<span>Schedule</span></a></nav><script src="script.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Official Class Website X.3 SMAN 2 KARIMUN">
+  <meta name="theme-color" content="#8E5A34">
+  <title>X.3 — SMAN 2 KARIMUN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header" id="top">
+      <a class="brand" href="#home" aria-label="X.3 Home">
+        <span class="brand-mark">X.3</span>
+        <span class="brand-school">SMAN 2 KARIMUN</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Navigasi utama">
+        <a href="#home">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#structure">STRUCTURE</a>
+        <a href="#students">STUDENTS</a>
+        <a href="#moments">MOMENTS</a>
+        <a href="#schedule">SCHEDULE</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero section" id="home">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">OFFICIAL CLASS WEBSITE</p>
+          <h1>Welcome to <span>X.3</span></h1>
+          <p class="hero-text">Satu kelas, banyak cerita. Tempat untuk menyimpan momen, mengenal teman, dan tetap terhubung.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://www.instagram.com/crimthreee_3" target="_blank" rel="noopener noreferrer">◎ Instagram Kelas ↗</a>
+            <a class="btn btn-ghost" href="#moments">Lihat Moments</a>
+          </div>
+        </div>
+
+        <div class="stats-grid reveal" aria-label="Statistik kelas">
+          <article class="stat-card"><strong>36</strong><span>Total Siswa</span></article>
+          <article class="stat-card"><strong>18</strong><span>Laki-laki</span></article>
+          <article class="stat-card"><strong>18</strong><span>Perempuan</span></article>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="section-heading reveal">
+          <p class="eyebrow">ABOUT US</p>
+          <h2>Tentang Kami</h2>
+        </div>
+        <div class="two-col">
+          <article class="info-card reveal">
+            <span class="card-number">01</span>
+            <h3>About School</h3>
+            <p>SMAN 2 KARIMUN adalah sekolah menengah atas yang menjadi tempat kami belajar, berkembang, membangun karakter, dan menciptakan berbagai pengalaman bersama.</p>
+          </article>
+          <article class="info-card reveal">
+            <span class="card-number">02</span>
+            <h3>About Class</h3>
+            <p>X.3 adalah kelas dengan berbagai karakter, minat, dan cerita. Kami saling mendukung dalam perjalanan sekolah, belajar bersama, dan menciptakan kenangan yang akan selalu diingat.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="structure">
+        <div class="section-heading reveal">
+          <p class="eyebrow">CLASS STRUCTURE</p>
+          <h2>Struktur Kelas</h2>
+        </div>
+        <div id="structureGrid" class="structure-grid"></div>
+      </section>
+
+      <section class="section" id="students">
+        <div class="section-heading reveal">
+          <p class="eyebrow">OUR CLASSMATES</p>
+          <h2>Student Highlight</h2>
+        </div>
+        <div class="student-highlight-wrap">
+          <div id="studentHighlight" class="student-highlight" aria-live="polite"></div>
+          <div id="studentHighlightDots" class="dots" aria-label="Slide siswa"></div>
+        </div>
+        <button class="btn btn-primary centered-btn" id="openStudents">Lihat Semua Murid</button>
+      </section>
+
+      <section class="section moments-section" id="moments">
+        <div class="section-heading reveal">
+          <p class="eyebrow">MEMORIES</p>
+          <h2>Moments</h2>
+        </div>
+        <div class="carousel" id="galleryCarousel" aria-label="Galeri moments">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carouselTrack"></div>
+          </div>
+          <button class="carousel-btn prev" id="galleryPrev" aria-label="Foto sebelumnya">‹</button>
+          <button class="carousel-btn next" id="galleryNext" aria-label="Foto berikutnya">›</button>
+        </div>
+        <div id="galleryDots" class="dots" aria-label="Slide gallery"></div>
+        <button class="btn btn-ghost centered-btn" id="openMoments">Selengkapnya</button>
+      </section>
+
+      <section class="section schedule-section" id="schedule">
+        <div class="section-heading reveal">
+          <p class="eyebrow">WEEKLY PLAN</p>
+          <h2>Jadwal Pelajaran</h2>
+        </div>
+        <div class="tabs-wrap">
+          <div class="tabs" id="scheduleTabs" role="tablist" aria-label="Hari jadwal pelajaran"></div>
+        </div>
+        <div id="scheduleContent" class="schedule-list"></div>
+
+        <div class="duty-heading">
+          <p class="eyebrow">CLEANING DUTY</p>
+          <h2>Jadwal Piket</h2>
+        </div>
+        <div class="tabs-wrap">
+          <div class="tabs" id="dutyTabs" role="tablist" aria-label="Hari jadwal piket"></div>
+        </div>
+        <div id="dutyContent" class="duty-list"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div>
+          <a class="footer-brand" href="#home">X.3</a>
+          <p>Official Class Website<br>SMAN 2 KARIMUN</p>
+        </div>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#about">School</a>
+          <a href="#structure">Structure</a>
+          <a href="#students">Students</a>
+          <a href="#moments">Moments</a>
+          <a href="https://www.instagram.com/crimthreee_3" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+        </div>
+      </div>
+      <div class="footer-credit">Made by Hafidzul Furqan</div>
+    </footer>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Navigasi mobile">
+    <a href="#home"><span>⌂</span><small>Home</small></a>
+    <a href="#students"><span>♙</span><small>Students</small></a>
+    <a href="#moments"><span>▧</span><small>Gallery</small></a>
+    <a href="#schedule"><span>☷</span><small>Schedule</small></a>
+  </nav>
+
+  <div class="modal" id="studentsModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="studentsModalTitle">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div><p class="eyebrow">OUR CLASSMATES</p><h2 id="studentsModalTitle">Semua Murid</h2></div>
+        <button class="icon-btn close-modal" data-close="studentsModal" aria-label="Tutup">×</button>
+      </div>
+      <div id="allStudentsGrid" class="all-students-grid"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="momentsModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="momentsModalTitle">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div><p class="eyebrow">MEMORIES</p><h2 id="momentsModalTitle">Semua Moments</h2></div>
+        <button class="icon-btn close-modal" data-close="momentsModal" aria-label="Tutup">×</button>
+      </div>
+      <div id="allGalleryGrid" class="all-gallery-grid"></div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <button class="icon-btn lightbox-close" id="lightboxClose" aria-label="Tutup foto">×</button>
+    <img id="lightboxImage" src="" alt="">
+    <p id="lightboxCaption"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
