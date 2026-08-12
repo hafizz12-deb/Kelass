@@ -4,7 +4,7 @@
    ========================================================= */
 
 const students = [
-  { name: "Hafidzul Furqan", age: 17, hobby: "Gaming & Badminton", quote: "Be better than yesterday.", image: "assets/images/student-01.svg" },
+  { name: "Hafidzul Furqan", age: 17, hobby: "Gaming & Badminton", quote: "Be better than yesterday.", image: "assets/images/student-01.png" },
   { name: "Aisyah Nur Rahma", age: 17, hobby: "Reading & Music", quote: "Keep growing, keep glowing.", image: "assets/images/student-02.svg" },
   { name: "Kirana Dewi", age: 17, hobby: "Writing & Photography", quote: "Small steps still move forward.", image: "assets/images/student-03.svg" },
   { name: "Joshua Tanuwijaya", age: 17, hobby: "Gaming & Sports", quote: "Enjoy the process.", image: "assets/images/student-04.svg" },
@@ -92,7 +92,7 @@ const duties = {
 };
 
 const gallery = [
-  { title: "Class Memory 01", image: "assets/images/moment-01.svg" },
+  { title: "Class Memory 01", image: "assets/images/moment-01.png" },
   { title: "Class Memory 02", image: "assets/images/moment-02.svg" },
   { title: "Class Memory 03", image: "assets/images/moment-03.svg" },
   { title: "Class Memory 04", image: "assets/images/moment-04.svg" },
