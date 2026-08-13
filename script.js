@@ -434,31 +434,18 @@ document.addEventListener("visibilitychange", () => {
     `).join("");
   }
 
-  function openAnonymousModal() {
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("modal-open");
-    setTimeout(() => input.focus(), 120);
-  }
-
-  function closeAnonymousModal() {
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("modal-open");
-  }
-
   function save() {
     localStorage.setItem(storageKey, JSON.stringify(messages));
   }
 
-  openButton.addEventListener("click", openAnonymousModal);
-
-  modal.querySelectorAll("[data-close]").forEach(button => {
-    button.addEventListener("click", closeAnonymousModal);
+  // Use the same popup system as "Lihat Semua Murid".
+  openButton.addEventListener("click", () => {
+    openModal("anonymousModal");
+    setTimeout(() => input.focus(), 120);
   });
 
   modal.addEventListener("click", event => {
-    if (event.target === modal) closeAnonymousModal();
+    if (event.target === modal) closeModal("anonymousModal");
 
     const button = event.target.closest("[data-anonymous-delete]");
     if (button) {
@@ -469,8 +456,8 @@ document.addEventListener("visibilitychange", () => {
   });
 
   document.addEventListener("keydown", event => {
-    if (event.key === "Escape" && modal.classList.contains("is-open")) {
-      closeAnonymousModal();
+    if (event.key === "Escape" && modal.classList.contains("open")) {
+      closeModal("anonymousModal");
     }
   });
 
