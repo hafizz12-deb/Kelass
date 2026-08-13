@@ -43,7 +43,7 @@ const students = [
 ];
 
 const structure = [
-  ["Ketua Kelas", "Hafidzul Furqan"],
+  ["Ketua Kelas", "Martelo"],
   ["Wakil Ketua Kelas", "Aisyah Nur Rahma"],
   ["Sekretaris 1", "Kirana Dewi"],
   ["Sekretaris 2", "Joshua Tanuwijaya"],
