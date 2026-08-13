@@ -360,3 +360,34 @@ document.addEventListener("visibilitychange", () => {
   if (document.hidden) window.clearInterval(galleryTimer);
   else startGalleryAuto();
 });
+
+
+// Reference-inspired landing page menu
+(() => {
+  const header = document.querySelector(".site-header");
+  const toggle = document.getElementById("menuToggle");
+  const nav = document.querySelector(".desktop-nav");
+  if (!header || !toggle || !nav) return;
+
+  toggle.addEventListener("click", () => {
+    const open = header.classList.toggle("menu-open");
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Tutup menu" : "Buka menu");
+  });
+
+  nav.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      header.classList.remove("menu-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Buka menu");
+    });
+  });
+
+  document.addEventListener("click", e => {
+    if (!header.contains(e.target)) {
+      header.classList.remove("menu-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Buka menu");
+    }
+  });
+})();
