@@ -79,6 +79,21 @@
         <div id="structureGrid" class="structure-grid"></div>
       </section>
 
+
+
+      <section class="anonymous-entry section" id="anonymous">
+        <div class="anonymous-entry-card reveal">
+          <div>
+            <p class="eyebrow">ANONYMOUS SPACE</p>
+            <h2>Text Anonim</h2>
+            <p>Tulis dan baca pesan dari teman-teman X.3 tanpa menampilkan nama pengirim.</p>
+          </div>
+          <button class="btn btn-primary anonymous-open" id="openAnonymous" type="button">
+            💬 Buka Chat Anonim
+          </button>
+        </div>
+      </section>
+
       <section class="section" id="students">
         <div class="section-heading reveal">
           <p class="eyebrow">OUR CLASSMATES</p>
@@ -153,6 +168,28 @@
     <a href="#moments"><span>▧</span><small>Gallery</small></a>
     <a href="#schedule"><span>☷</span><small>Schedule</small></a>
   </nav>
+
+
+  <div class="modal anonymous-modal" id="anonymousModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="anonymousModalTitle">
+    <div class="modal-panel anonymous-modal-panel">
+      <div class="modal-header">
+        <div>
+          <p class="eyebrow">ANONYMOUS SPACE</p>
+          <h2 id="anonymousModalTitle">Chat Anonim</h2>
+        </div>
+        <button class="icon-btn close-modal" data-close="anonymousModal" aria-label="Tutup">×</button>
+      </div>
+
+      <div class="anonymous-modal-messages" id="anonymousMessages" aria-live="polite"></div>
+
+      <form class="anonymous-form" id="anonymousForm">
+        <label class="sr-only" for="anonymousInput">Tulis pesan anonim</label>
+        <input id="anonymousInput" maxlength="180" autocomplete="off" placeholder="Ketik pesan Anda..." required>
+        <button type="submit" aria-label="Kirim pesan">➤</button>
+      </form>
+      <p class="anonymous-note">Pesan ditampilkan tanpa nama pengirim. Jangan kirim data pribadi atau pesan yang merugikan orang lain.</p>
+    </div>
+  </div>
 
   <div class="modal" id="studentsModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="studentsModalTitle">
     <div class="modal-panel">
