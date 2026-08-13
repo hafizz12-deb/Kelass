@@ -727,9 +727,9 @@ h3 { font-size: 1.35rem; }
 }
 
 .brand-school-logo {
-  width: 34px;
-  height: 34px;
-  flex: 0 0 34px;
+  width: 39px;
+  height: 39px;
+  flex: 0 0 39px;
   object-fit: contain;
   display: block;
 }
@@ -740,8 +740,8 @@ h3 { font-size: 1.35rem; }
   }
 
   .brand-school-logo {
-    width: 28px;
-    height: 28px;
-    flex-basis: 28px;
+    width: 33px;
+    height: 33px;
+    flex-basis: 33px;
   }
 }
