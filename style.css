@@ -716,3 +716,32 @@ h3 { font-size: 1.35rem; }
     padding: 18px;
   }
 }
+
+
+/* School logo in header */
+.brand-school-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.brand-school-logo {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 640px) {
+  .brand-school-wrap {
+    gap: 7px;
+  }
+
+  .brand-school-logo {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+  }
+}
