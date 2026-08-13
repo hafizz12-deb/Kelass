@@ -47,8 +47,7 @@ const structure = [
   ["Wakil Ketua Kelas", "Aisyah Nur Rahma"],
   ["Sekretaris 1", "Kirana Dewi"],
   ["Sekretaris 2", "Joshua Tanuwijaya"],
-  ["Bendahara", "Dinda Ayu Lestari"],
-  ["Keamanan", "Nama Petugas Keamanan"]
+  ["Bendahara", "Dinda Ayu Lestari"]
 ];
 
 const schedule = {
@@ -391,61 +390,4 @@ document.addEventListener("visibilitychange", () => {
       toggle.setAttribute("aria-label", "Buka menu");
     }
   });
-})();
-
-
-/* Anonymous text — local browser storage */
-(() => {
-  const form = document.getElementById("anonymousForm");
-  const input = document.getElementById("anonymousInput");
-  const box = document.getElementById("anonymousMessages");
-  const clearButton = document.getElementById("clearAnonymous");
-  if (!form || !input || !box) return;
-  const storageKey = "x3_anonymous_messages_v1";
-  let messages = JSON.parse(localStorage.getItem(storageKey) || "[]");
-
-  function escapeMessage(value) {
-    return String(value).replace(/[&<>"']/g, char => ({
-      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-    }[char]));
-  }
-  function renderAnonymous() {
-    if (!messages.length) {
-      box.innerHTML = `<div class="anonymous-empty"><span>◌</span><p>Belum ada pesan anonim.</p><small>Jadilah yang pertama menulis sesuatu.</small></div>`;
-      return;
-    }
-    box.innerHTML = messages.map((message, index) => `
-      <article class="anonymous-message">
-        <div class="anonymous-avatar" aria-hidden="true">●</div>
-        <p>${escapeMessage(message)}</p>
-        <button type="button" class="anonymous-delete" data-anonymous-delete="${index}" aria-label="Hapus pesan">×</button>
-      </article>
-    `).join("");
-  }
-  function save() { localStorage.setItem(storageKey, JSON.stringify(messages)); }
-
-  form.addEventListener("submit", event => {
-    event.preventDefault();
-    const value = input.value.trim();
-    if (!value) return;
-    messages.push(value);
-    messages = messages.slice(-30);
-    save();
-    renderAnonymous();
-    input.value = "";
-    input.focus();
-  });
-  box.addEventListener("click", event => {
-    const button = event.target.closest("[data-anonymous-delete]");
-    if (!button) return;
-    messages.splice(Number(button.dataset.anonymousDelete), 1);
-    save();
-    renderAnonymous();
-  });
-  clearButton?.addEventListener("click", () => {
-    messages = [];
-    save();
-    renderAnonymous();
-  });
-  renderAnonymous();
 })();
