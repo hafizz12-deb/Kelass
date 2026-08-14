@@ -42,14 +42,35 @@ const students = [
   { name: "Nama Siswa 36", age: 17, hobby: "Hobby dapat diedit", quote: "Quote dapat diedit.", image: "assets/images/student-36.svg" }
 ];
 
-const structure = [
-  ["Ketua Kelas", "Martelo"],
-  ["Wakil Ketua Kelas", "Aisyah Nur Rahma"],
-  ["Sekretaris 1", "Kirana Dewi"],
-  ["Sekretaris 2", "Joshua Tanuwijaya"],
-  ["Bendahara", "Dinda Ayu Lestari"],
-  ["Keamanan", "Nama Petugas Keamanan"]
-];
+const structure = {
+  ketua: {
+    role: "Ketua Kelas",
+    name: "[Nama Ketua]",
+    icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14M7 17h10M6 4l3 5 3-7 3 7 3-5-1 10H7L6 4Z"/></svg>`
+  },
+  wakil: {
+    role: "Wakil Ketua Kelas",
+    name: "[Nama Wakil]",
+    icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-4 3.1-6 7-6s6.2 2 7 6"/><path d="M17.5 5.5 19 7l2-2"/></svg>`
+  },
+  level3: [
+    {
+      role: "Sekretaris",
+      name: "[Nama Sekretaris]",
+      icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3.5h9l3 3V20.5H6z"/><path d="M15 3.5v4h4M9 11h6M9 15h6"/></svg>`
+    },
+    {
+      role: "Bendahara",
+      name: "[Nama Bendahara]",
+      icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v13H4z"/><path d="M7 7V5.5A2.5 2.5 0 0 1 9.5 3H20v4M15 13h3"/></svg>`
+    },
+    {
+      role: "Keamanan",
+      name: "[Nama Keamanan]",
+      icon: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 19 6v5c0 4.4-2.7 7.9-7 10-4.3-2.1-7-5.6-7-10V6z"/><path d="m9.5 12 1.7 1.7 3.5-3.5"/></svg>`
+    }
+  ]
+};
 
 const schedule = {
   Senin: [
@@ -114,14 +135,57 @@ function escapeHTML(value) {
   }[char]));
 }
 
-/* Structure */
-$("#structureGrid").innerHTML = structure.map(([role, person]) => `
-  <article class="structure-card reveal">
-    <p class="role">${escapeHTML(role)}</p>
-    <div class="person">${escapeHTML(person)}</div>
-    <div class="rule"></div>
-  </article>
-`).join("");
+/* Organization chart */
+$("#structureGrid").innerHTML = `
+  <div class="org-level org-level-top">
+    <article class="org-card org-card-leader reveal">
+      <div class="org-icon">${structure.ketua.icon}</div>
+      <div class="org-copy">
+        <p class="org-role">${escapeHTML(structure.ketua.role)}</p>
+        <h3>${escapeHTML(structure.ketua.name)}</h3>
+        <span class="org-tag">LEVEL 1</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="org-connector org-connector-top" aria-hidden="true">
+    <span></span>
+  </div>
+
+  <div class="org-level org-level-deputy">
+    <article class="org-card org-card-deputy reveal">
+      <div class="org-icon">${structure.wakil.icon}</div>
+      <div class="org-copy">
+        <p class="org-role">${escapeHTML(structure.wakil.role)}</p>
+        <h3>${escapeHTML(structure.wakil.name)}</h3>
+        <span class="org-tag">LEVEL 2</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="org-connector org-connector-branch" aria-hidden="true">
+    <span class="org-branch-vertical"></span>
+    <span class="org-branch-horizontal"></span>
+  </div>
+
+  <div class="org-level-three-heading reveal">
+    <span>LEVEL 3</span>
+    <strong>Tiga jabatan setara</strong>
+  </div>
+
+  <div class="org-level org-level-three">
+    ${structure.level3.map(item => `
+      <article class="org-card org-card-peer reveal">
+        <div class="org-icon">${item.icon}</div>
+        <div class="org-copy">
+          <p class="org-role">${escapeHTML(item.role)}</p>
+          <h3>${escapeHTML(item.name)}</h3>
+          <span class="org-tag">SETARA</span>
+        </div>
+      </article>
+    `).join("")}
+  </div>
+`;
 
 /* Student cards */
 function studentCard(student) {
