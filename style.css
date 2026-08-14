@@ -945,6 +945,7 @@ h3 { font-size: 1.35rem; }
   align-items: stretch;
   width: 100%;
   margin-top: 20px;
+  transform: translateY(30px);
 }
 .org-level-three .org-card { min-width: 0; }
 @media (max-width: 899px) {
