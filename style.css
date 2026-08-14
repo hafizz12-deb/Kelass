@@ -1096,17 +1096,41 @@ h3 { font-size: 1.35rem; }
 /* Final organization-chart connector refinement */
 .org-connector-branch {
   height: 52px;
+  position: relative;
+}
+.org-connector-branch .org-branch-vertical {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1.5px;
+  height: 100%;
+  transform: translateX(-50%);
+  background: var(--light-brown);
+  opacity: .75;
 }
 .org-branch-horizontal {
+  position: absolute;
   left: 16.666%;
   right: 16.666%;
   top: 100%;
+  height: 1.5px;
   transform: translateY(-1px);
+  background: var(--light-brown);
+  opacity: .75;
 }
 .org-branch-horizontal::before,
 .org-branch-horizontal::after {
-  display: none;
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 1.5px;
+  height: 52px;
+  background: var(--light-brown);
+  opacity: .75;
 }
+.org-branch-horizontal::before { left: 0; }
+.org-branch-horizontal::after { right: 0; }
 .org-level-three-heading {
   display: none !important;
 }
@@ -1114,8 +1138,8 @@ h3 { font-size: 1.35rem; }
   margin-top: 0;
 }
 
-/* Mobile: preserve the same geometry and make the horizontal branch
-   touch the top-center of all three peer cards. */
+/* Mobile: preserve the same hierarchy geometry and keep branch legs
+   touching the top edge of the three peer cards. */
 @media (max-width: 899px) {
   .org-connector-branch {
     height: 44px;
@@ -1125,7 +1149,14 @@ h3 { font-size: 1.35rem; }
     right: 16.666%;
     top: 100%;
   }
+  .org-branch-horizontal::before,
+  .org-branch-horizontal::after {
+    height: 44px;
+  }
 }
 
 /* No extra Level-3 helper text; the connector geometry shows the hierarchy. */
+.org-level-three-heading { display: none !important; }
+
+/* Final cleanup: no hierarchy helper label in the chart. */
 .org-level-three-heading { display: none !important; }
