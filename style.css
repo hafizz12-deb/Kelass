@@ -944,6 +944,7 @@ h3 { font-size: 1.35rem; }
   gap: 14px;
   align-items: stretch;
   width: 100%;
+  margin-top: 20px;
   transform: translateY(30px);
 }
 .org-level-three .org-card { min-width: 0; }
@@ -1104,7 +1105,7 @@ h3 { font-size: 1.35rem; }
   top: 0;
   left: 50%;
   width: 1.5px;
-  height: 130px;
+  height: 100%;
   transform: translateX(-50%);
   background: var(--light-brown);
   opacity: .75;
@@ -1161,3 +1162,23 @@ h3 { font-size: 1.35rem; }
 
 /* Final cleanup: no hierarchy helper label in the chart. */
 .org-level-three-heading { display: none !important; }
+
+
+/* ADD ONLY: vertical line from the bottom of Wakil Ketua to Bendahara */
+.organization-chart .org-card-deputy {
+  position: relative;
+}
+
+.organization-chart .org-card-deputy::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 2px;
+  height: 108px;
+  transform: translateX(-50%);
+  background: var(--light-brown);
+  opacity: .8;
+  z-index: 20;
+  pointer-events: none;
+}
