@@ -143,7 +143,6 @@ $("#structureGrid").innerHTML = `
       <div class="org-copy">
         <p class="org-role">${escapeHTML(structure.ketua.role)}</p>
         <h3>${escapeHTML(structure.ketua.name)}</h3>
-        <span class="org-tag">LEVEL 1</span>
       </div>
     </article>
   </div>
@@ -158,7 +157,6 @@ $("#structureGrid").innerHTML = `
       <div class="org-copy">
         <p class="org-role">${escapeHTML(structure.wakil.role)}</p>
         <h3>${escapeHTML(structure.wakil.name)}</h3>
-        <span class="org-tag">LEVEL 2</span>
       </div>
     </article>
   </div>
@@ -169,7 +167,6 @@ $("#structureGrid").innerHTML = `
   </div>
 
   <div class="org-level-three-heading reveal">
-    <span>LEVEL 3</span>
     <strong>Tiga jabatan setara</strong>
   </div>
 
@@ -180,8 +177,7 @@ $("#structureGrid").innerHTML = `
         <div class="org-copy">
           <p class="org-role">${escapeHTML(item.role)}</p>
           <h3>${escapeHTML(item.name)}</h3>
-          <span class="org-tag">SETARA</span>
-        </div>
+          </div>
       </article>
     `).join("")}
   </div>

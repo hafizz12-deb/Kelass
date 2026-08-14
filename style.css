@@ -947,50 +947,70 @@ h3 { font-size: 1.35rem; }
 }
 .org-level-three .org-card { min-width: 0; }
 @media (max-width: 899px) {
-  .org-branch-horizontal,
+  /*
+   * Keep the real organizational-chart geometry on tablets and phones:
+   * Ketua -> Wakil -> horizontal Level 3.
+   * The three peer cards remain on one row so the equal hierarchy is
+   * immediately visible, just like the desktop chart.
+   */
+  .org-connector-branch {
+    height: 44px;
+  }
+  .org-branch-horizontal {
+    left: 16.666%;
+    right: 16.666%;
+    top: 100%;
+  }
   .org-branch-horizontal::before,
   .org-branch-horizontal::after {
-    display: none;
+    top: -43px;
+    height: 44px;
   }
-  .org-connector-branch {
-    height: 42px;
+  .org-level-three-heading {
+    margin-bottom: 12px;
   }
   .org-level-three {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    position: relative;
-  }
-  .org-level-three::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: -42px;
-    bottom: 0;
-    width: 1.5px;
-    background: var(--light-brown);
-    opacity: .7;
-    transform: translateX(-50%);
-    z-index: 0;
-  }
-  .org-level-three-heading,
-  .org-level-three .org-card {
-    position: relative;
-    z-index: 1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+    width: 100%;
+    align-items: stretch;
   }
   .org-level-three .org-card {
-    background: var(--white);
+    min-width: 0;
+    width: 100%;
+    min-height: 104px;
+    padding: 12px 7px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 7px;
+    border-radius: 14px;
   }
-  .org-level-three .org-card::before {
-    content: "";
-    position: absolute;
-    left: -1px;
-    top: 50%;
-    width: 50%;
-    height: 1.5px;
-    background: var(--light-brown);
-    opacity: .7;
-    transform: translateX(-100%);
-    display: none;
+  .org-level-three .org-icon {
+    flex: 0 0 34px;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+  .org-level-three .org-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .org-level-three .org-role {
+    margin-bottom: 3px;
+    font-size: .48rem;
+    letter-spacing: .08em;
+    line-height: 1.25;
+  }
+  .org-level-three .org-copy h3 {
+    font-size: .70rem;
+    line-height: 1.18;
+  }
+  .org-level-three .org-tag {
+    margin-top: 5px;
+    padding: 3px 5px;
+    font-size: .43rem;
+    letter-spacing: .08em;
   }
 }
 @media (min-width: 900px) {
@@ -1006,24 +1026,69 @@ h3 { font-size: 1.35rem; }
     width: 100%;
   }
   .org-card {
-    min-height: 90px;
-    padding: 16px;
-    gap: 12px;
-    border-radius: 18px;
+    min-height: 88px;
+    padding: 14px;
+    gap: 10px;
+    border-radius: 16px;
   }
-  .org-card-leader { min-height: 100px; }
+  .org-card-leader {
+    min-height: 96px;
+  }
+  .org-card-deputy {
+    min-height: 88px;
+  }
   .org-icon {
-    flex-basis: 42px;
-    width: 42px;
-    height: 42px;
+    flex-basis: 38px;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+  }
+  .org-icon svg { width: 20px; height: 20px; }
+  .org-card-leader .org-copy h3 { font-size: 1.16rem; }
+  .org-card-deputy .org-copy h3 { font-size: .92rem; }
+  .org-level-three-heading {
+    margin-bottom: 11px;
+    font-size: .52rem;
+  }
+  .org-level-three { gap: 6px; }
+}
+
+@media (max-width: 380px) {
+  .org-level-three {
+    gap: 4px;
+  }
+  .org-level-three .org-card {
+    min-height: 100px;
+    padding: 9px 4px;
     border-radius: 12px;
   }
-  .org-icon svg { width: 22px; height: 22px; }
-  .org-card-leader .org-copy h3 { font-size: 1.22rem; }
-  .org-copy h3 { font-size: .98rem; }
-  .org-level-three-heading {
-    margin-bottom: 12px;
-    font-size: .57rem;
+  .org-level-three .org-icon {
+    flex-basis: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
   }
-  .org-level-three { gap: 9px; }
+  .org-level-three .org-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  .org-level-three .org-role {
+    font-size: .42rem;
+    letter-spacing: .045em;
+  }
+  .org-level-three .org-copy h3 {
+    font-size: .61rem;
+  }
+  .org-level-three .org-tag {
+    font-size: .37rem;
+    padding: 2px 4px;
+  }
+}
+
+/* Organization labels removed for a cleaner chart */
+.org-tag { display: none !important; }
+.org-level-three-heading {
+  border: 0;
+  background: transparent;
+  padding: 0;
 }
