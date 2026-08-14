@@ -909,7 +909,7 @@ h3 { font-size: 1.35rem; }
 .org-branch-horizontal::after {
   content: "";
   position: absolute;
-  top: -57px;
+  top: 0;
   width: 1.5px;
   height: 58px;
   background: var(--light-brown);
@@ -963,7 +963,7 @@ h3 { font-size: 1.35rem; }
   }
   .org-branch-horizontal::before,
   .org-branch-horizontal::after {
-    top: -43px;
+    top: 0;
     height: 44px;
   }
   .org-level-three-heading {
@@ -1126,3 +1126,6 @@ h3 { font-size: 1.35rem; }
     top: 100%;
   }
 }
+
+/* No extra Level-3 helper text; the connector geometry shows the hierarchy. */
+.org-level-three-heading { display: none !important; }
