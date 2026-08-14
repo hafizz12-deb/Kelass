@@ -944,8 +944,6 @@ h3 { font-size: 1.35rem; }
   gap: 14px;
   align-items: stretch;
   width: 100%;
-  margin-top: 20px;
-  transform: translateY(30px);
 }
 .org-level-three .org-card { min-width: 0; }
 @media (max-width: 899px) {
@@ -1162,74 +1160,3 @@ h3 { font-size: 1.35rem; }
 
 /* Final cleanup: no hierarchy helper label in the chart. */
 .org-level-three-heading { display: none !important; }
-
-/* FINAL: connector Wakil -> Bendahara and outer branches */
-.organization-chart .org-connector-branch {
-  position: relative;
-  height: 76px;
-  width: 100%;
-  display: block;
-  pointer-events: none;
-}
-.organization-chart .org-branch-vertical {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 76px;
-  transform: translateX(-50%);
-  background: var(--light-brown);
-  opacity: .8;
-}
-.organization-chart .org-branch-horizontal {
-  position: absolute;
-  left: 16.666%;
-  right: 16.666%;
-  top: 75px;
-  height: 2px;
-  transform: none;
-  background: var(--light-brown);
-  opacity: .8;
-}
-.organization-chart .org-branch-horizontal::before,
-.organization-chart .org-branch-horizontal::after {
-  content: "";
-  display: block !important;
-  position: absolute;
-  top: 0;
-  width: 2px;
-  height: 18px;
-  background: var(--light-brown);
-  opacity: .8;
-}
-.organization-chart .org-branch-horizontal::before { left: 0; }
-.organization-chart .org-branch-horizontal::after { right: 0; }
-
-/* Center vertical branch that touches Bendahara */
-.organization-chart .org-branch-to-bendahara {
-  position: absolute;
-  left: 50%;
-  top: 75px;
-  width: 2px;
-  height: 18px;
-  transform: translateX(-50%);
-  background: var(--light-brown);
-  opacity: .8;
-  z-index: 2;
-}
-.organization-chart .org-level-three {
-  margin-top: 18px !important;
-}
-
-@media (max-width: 899px) {
-  .organization-chart .org-connector-branch { height: 64px; }
-  .organization-chart .org-branch-vertical { height: 64px; }
-  .organization-chart .org-branch-horizontal { top: 63px; }
-  .organization-chart .org-branch-to-bendahara {
-    top: 63px;
-    height: 18px;
-  }
-  .organization-chart .org-branch-horizontal::before,
-  .organization-chart .org-branch-horizontal::after { height: 18px; }
-  .organization-chart .org-level-three { margin-top: 18px !important; }
-}
