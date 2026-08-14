@@ -166,10 +166,6 @@ $("#structureGrid").innerHTML = `
     <span class="org-branch-horizontal"></span>
   </div>
 
-  <div class="org-level-three-heading reveal">
-    <strong>Tiga jabatan setara</strong>
-  </div>
-
   <div class="org-level org-level-three">
     ${structure.level3.map(item => `
       <article class="org-card org-card-peer reveal">

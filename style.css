@@ -1092,3 +1092,37 @@ h3 { font-size: 1.35rem; }
   background: transparent;
   padding: 0;
 }
+
+/* Final organization-chart connector refinement */
+.org-connector-branch {
+  height: 52px;
+}
+.org-branch-horizontal {
+  left: 16.666%;
+  right: 16.666%;
+  top: 100%;
+  transform: translateY(-1px);
+}
+.org-branch-horizontal::before,
+.org-branch-horizontal::after {
+  display: none;
+}
+.org-level-three-heading {
+  display: none !important;
+}
+.org-level-three {
+  margin-top: 0;
+}
+
+/* Mobile: preserve the same geometry and make the horizontal branch
+   touch the top-center of all three peer cards. */
+@media (max-width: 899px) {
+  .org-connector-branch {
+    height: 44px;
+  }
+  .org-branch-horizontal {
+    left: 16.666%;
+    right: 16.666%;
+    top: 100%;
+  }
+}
